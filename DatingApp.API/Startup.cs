@@ -93,7 +93,12 @@ namespace DatingApp.API
             app.UseHttpsRedirection();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthentication();
-            app.UseMvc();
+            app.UseMvc(routes => {
+                routes.MapSpaFallbackRoute(
+                    name: "sap-fallback",
+                    defaults: new {controller = "Fallback", action = "Index"}
+                );
+            });
         }
     }
 }
